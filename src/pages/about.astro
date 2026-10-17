@@ -1,0 +1,189 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHead from '../components/PageHead.astro';
+import Icon from '../components/Icon.astro';
+import { links, projects } from '../data/site';
+---
+
+<Base title="About — maxscopp">
+  <div class="container page">
+    <PageHead eyebrow="About" title="Agency Speed." accent="Enterprise Rigor.">
+      Ten years of shipping for brands, startups and enterprise — you get the best of each. Plus
+      AI, minus the chaos.
+    </PageHead>
+
+    <dl class="proof" data-reveal>
+      <div>
+        <dt>Brands</dt>
+        <dd>UI and UX for Milka, Daimler BKK, OHB and Oridiparma.</dd>
+      </div>
+      <div>
+        <dt>Startups</dt>
+        <dd>Fast loops, real ownership. Telekom among the customers.</dd>
+      </div>
+      <div>
+        <dt>Enterprise</dt>
+        <dd>Learning platforms for Sparkasse. A 25-year-old CPQ product, modernized.</dd>
+      </div>
+      <div>
+        <dt>Today</dt>
+        <dd>CI/CD and AI integrations in Tesla automation.</dd>
+      </div>
+    </dl>
+
+    <section class="side" data-reveal>
+      <h2>Beyond the Day Job</h2>
+      <p>
+        I support open source where I can, like <a href="https://heyapi.dev/">Hey API</a> — and
+        build my own.
+      </p>
+
+      <ul class="list">
+        {
+          projects.map((p) => (
+            <li>
+              <a class="item" href={p.href}>
+                <span class="icon-tile">
+                  <Icon name={p.icon} size={20} />
+                </span>
+                <span class="body">
+                  <h3>
+                    {p.title}
+                    {p.current && <span class="pill">Current Focus</span>}
+                  </h3>
+                  <p>{p.description}</p>
+                </span>
+                <Icon name="arrow" size={18} class="go" />
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <section class="cta" data-reveal>
+      <h2>Sounds Like a Fit?</h2>
+      <div class="actions">
+        <a class="btn btn--solid" href="/contact">Let’s Talk <Icon name="arrow" size={16} /></a>
+        <a class="btn" href={links.email}><Icon name="mail" size={16} /> Email Me</a>
+      </div>
+    </section>
+  </div>
+</Base>
+
+<style>
+  .proof {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px 48px;
+    max-width: 720px;
+    margin: 0;
+  }
+  .proof div {
+    padding-top: 16px;
+    border-top: 1px solid var(--line);
+  }
+  dt {
+    font-weight: 500;
+  }
+  dd {
+    margin: 4px 0 0;
+    font-size: 15px;
+    color: var(--ink-2);
+  }
+  .side,
+  .cta {
+    max-width: 720px;
+    margin-top: 88px;
+  }
+  .side h2 {
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+  .side > p {
+    margin-top: 8px;
+    color: var(--ink-2);
+  }
+  .side > p a {
+    color: var(--ink);
+    text-decoration: underline;
+    text-decoration-color: var(--line-2);
+    text-underline-offset: 3px;
+    transition: text-decoration-color 0.2s;
+  }
+  .side > p a:hover {
+    text-decoration-color: var(--violet);
+  }
+  .list {
+    list-style: none;
+    margin: 20px 0 0;
+    padding: 0;
+  }
+  .list li + li {
+    border-top: 1px solid var(--line);
+  }
+  .item {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+    margin-inline: -20px;
+    border-radius: 24px;
+    transition: background 0.2s var(--ease);
+  }
+  .item:hover {
+    background: var(--hover);
+  }
+  h3 {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    margin: 0;
+    font-size: 17px;
+    font-weight: 500;
+    letter-spacing: -0.015em;
+  }
+  .body p {
+    margin-top: 2px;
+    color: var(--ink-2);
+    font-size: 15px;
+  }
+  .item :global(.go) {
+    color: var(--ink-3);
+    transition:
+      transform 0.2s var(--ease),
+      color 0.2s;
+  }
+  .item:hover :global(.go) {
+    transform: translateX(3px);
+    color: var(--violet);
+  }
+  .cta h2 {
+    margin-left: -0.05em;
+    font-size: clamp(32px, 4vw, 44px);
+    font-weight: 600;
+    letter-spacing: -0.04em;
+  }
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 24px;
+  }
+  @media (max-width: 600px) {
+    .proof {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+    .item {
+      grid-template-columns: auto 1fr;
+      gap: 16px;
+    }
+    .item :global(.go) {
+      display: none;
+    }
+  }
+</style>

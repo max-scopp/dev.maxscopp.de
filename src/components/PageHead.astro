@@ -1,0 +1,40 @@
+---
+interface Props {
+  eyebrow: string;
+  title: string;
+  accent?: string;
+}
+const { eyebrow, title, accent } = Astro.props;
+---
+
+<header class="page-head">
+  <p class="kicker" data-reveal>{eyebrow}</p>
+  <h1 data-reveal style="--i:1">
+    {title}
+    {accent && <><br /><span class="gradient-text">{accent}</span></>}
+  </h1>
+  <div class="lede" data-reveal style="--i:2"><slot /></div>
+</header>
+
+<style>
+  .page-head {
+    max-width: 720px;
+    margin-bottom: clamp(48px, 7vw, 80px);
+  }
+  h1 {
+    margin: 20px 0 0 -0.06em;
+    font-size: clamp(44px, 6.4vw, 76px);
+    font-weight: 600;
+    letter-spacing: -0.045em;
+    line-height: 1;
+  }
+  .lede :global(p + p) {
+    margin-top: 14px;
+  }
+  .lede {
+    margin-top: 20px;
+    max-width: 56ch;
+    color: var(--ink-2);
+    font-size: 17px;
+  }
+</style>
